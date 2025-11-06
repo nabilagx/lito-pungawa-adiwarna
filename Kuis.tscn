@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpby1ym7jjxxt"]
+
+[ext_resource type="Script" uid="uid://3sp47s3qghdj" path="res://kuis.gd" id="1_s05y4"]
+
+[node name="Kuis" type="Node2D"]
+script = ExtResource("1_s05y4")
+
+[node name="Kuis" type="CanvasLayer" parent="."]
+
+[node name="ColorRect_Overlay" type="ColorRect" parent="Kuis"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7058824)
+
+[node name="PanelKuis" type="PanelContainer" parent="Kuis"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -190.0
+offset_right = 350.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Kuis/PanelKuis"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label_Soal" type="Label" parent="Kuis/PanelKuis/VBoxContainer"]
+layout_mode = 2
+text = "[Soal akan muncul di sini...]"
+
+[node name="Button_A" type="Button" parent="Kuis/PanelKuis/VBoxContainer"]
+layout_mode = 2
+text = "A. Pilihan A"
+
+[node name="Button_B" type="Button" parent="Kuis/PanelKuis/VBoxContainer"]
+layout_mode = 2
+text = "B. Pilihan B"
+
+[node name="Button_C" type="Button" parent="Kuis/PanelKuis/VBoxContainer"]
+layout_mode = 2
+text = "C. Pilihan C"
+
+[node name="Button_D" type="Button" parent="Kuis/PanelKuis/VBoxContainer"]
+layout_mode = 2
+text = "D. Pilihan D
+"
