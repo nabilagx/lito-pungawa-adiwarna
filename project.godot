@@ -15,11 +15,20 @@ run/main_scene="uid://ba34j48541e"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Lito="*res://lito.tscn"
+Global="*res://Global.gd"
+
 [display]
 
 window/size/viewport_width=720
 window/size/viewport_height=1280
 window/stretch/mode="canvas_items"
+
+[dotnet]
+
+project/assembly_name="LITO"
 
 [input]
 

@@ -214,18 +214,19 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r6c"]
-size = Vector2(319, 377)
+size = Vector2(356, 377)
 
 [node name="lito" type="CharacterBody2D"]
-position = Vector2(391, 640)
 script = ExtResource("1_51jpa")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6, -31)
 scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_6ip5v")
 animation = &"idle_kedip"
-frame_progress = 0.74389106
+frame_progress = 0.70816845
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -2.5)
+position = Vector2(-18, -26)
 shape = SubResource("RectangleShape2D_q6r6c")
+debug_color = Color(0.49428427, 0.5315848, 0.65504384, 0.41960785)

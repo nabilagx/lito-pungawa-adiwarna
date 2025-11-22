@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://lwp6ah1wn5vr"]
+
+[ext_resource type="Texture2D" uid="uid://c0fn6ndx31bt5" path="res://Aset New/koin cipta.png" id="1_hj425"]
+[ext_resource type="Script" uid="uid://d01urrmp6hgur" path="res://HeaderUI.gd" id="1_xj0v6"]
+[ext_resource type="Texture2D" uid="uid://cn42cid5s7f3e" path="res://Aset New/literasi budaya.png" id="2_xj0v6"]
+[ext_resource type="Texture2D" uid="uid://b4sv02awhi0uo" path="res://Aset New/petir new.png" id="3_el2yo"]
+[ext_resource type="Texture2D" uid="uid://cvnm3ghn46ep7" path="res://Aset New/kosong bar literasi.png" id="4_adofx"]
+[ext_resource type="Texture2D" uid="uid://dqjpf8605kh5" path="res://Aset New/full bar literasi.png" id="5_ub1ht"]
+[ext_resource type="Texture2D" uid="uid://bcxoxg84y2f5o" path="res://Aset New/kosong bar energi.png" id="7_sfxvk"]
+[ext_resource type="Texture2D" uid="uid://c2yakfcjnelfe" path="res://Aset New/full bar energi.png" id="8_q6up7"]
+
+[node name="container_atas" type="HBoxContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -1282.0
+offset_right = 360.0
+offset_bottom = -1152.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+script = ExtResource("1_xj0v6")
+
+[node name="Panel_koin" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="Panel_koin"]
+layout_mode = 2
+texture_normal = ExtResource("1_hj425")
+
+[node name="KoinCipta_Label" type="Label" parent="Panel_koin"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+
+[node name="Panel_literasi" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="Panel_literasi"]
+layout_mode = 2
+texture_normal = ExtResource("2_xj0v6")
+
+[node name="Literasi_Bar" type="TextureProgressBar" parent="Panel_literasi"]
+custom_minimum_size = Vector2(4, 4)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_under = ExtResource("4_adofx")
+texture_progress = ExtResource("5_ub1ht")
+
+[node name="Panel_energi" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="Panel_energi"]
+layout_mode = 2
+texture_normal = ExtResource("3_el2yo")
+
+[node name="Energi_Bar" type="TextureProgressBar" parent="Panel_energi"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_under = ExtResource("7_sfxvk")
+texture_progress = ExtResource("8_q6up7")

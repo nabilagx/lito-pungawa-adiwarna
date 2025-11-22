@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=3 uid="uid://hmviwhvb1584"]
+
+[ext_resource type="Texture2D" uid="uid://bd367j2k2381q" path="res://Aset New/Lukis Batik.png" id="1_8s83d"]
+[ext_resource type="FontFile" uid="uid://df1280yfbh3k2" path="res://Aset New/bytebounce/ByteBounce.ttf" id="2_6rbpx"]
+[ext_resource type="Script" uid="uid://cnyptix6bhshj" path="res://KreasiBatik.gd" id="2_135sn"]
+[ext_resource type="Texture2D" uid="uid://dhipwwtkcbp4t" path="res://Aset New/mix  kawung jumbo.png" id="3_135sn"]
+[ext_resource type="Texture2D" uid="uid://cdbhar4vdtt0h" path="res://pilih.png" id="4_edqyy"]
+[ext_resource type="Texture2D" uid="uid://sqnigtfeosbx" path="res://pilih press.png" id="5_us05s"]
+[ext_resource type="Texture2D" uid="uid://cq2mfwpe818mo" path="res://Aset New/mix kawung jumbo.png" id="6_3sk3t"]
+[ext_resource type="Texture2D" uid="uid://cx4otvssjqcr3" path="res://Aset New/back jumbo.png" id="8_us05s"]
+[ext_resource type="Texture2D" uid="uid://d2jpdxfhpm5el" path="res://Aset New/back press jumbo.png" id="9_3sk3t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojsi6"]
+bg_color = Color(0.8466836, 0.85754526, 0.8350781, 0.033)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.8433892, 0, 0)
+
+[node name="LukisBatik" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Background_Polos" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 720.0
+offset_bottom = 1277.0
+texture = ExtResource("1_8s83d")
+script = ExtResource("2_135sn")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 20.0
+offset_right = 718.0
+offset_bottom = 170.0
+theme_override_fonts/font = ExtResource("2_6rbpx")
+theme_override_font_sizes/font_size = 100
+text = "Lukis Batik
+Nusantara"
+horizontal_alignment = 1
+
+[node name="Bingkai_9x16" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 29.0
+offset_right = 696.0
+offset_bottom = 1248.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ojsi6")
+
+[node name="Padding_Container" type="MarginContainer" parent="Bingkai_9x16"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 160
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 50
+
+[node name="Content_VBox" type="HBoxContainer" parent="Bingkai_9x16/Padding_Container"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Pilihan_Parang" type="VBoxContainer" parent="Bingkai_9x16/Padding_Container/Content_VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Thumbnail_Parang" type="TextureRect" parent="Bingkai_9x16/Padding_Container/Content_VBox/Pilihan_Parang"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+texture = ExtResource("3_135sn")
+
+[node name="Btn_Pilih_Parang" type="TextureButton" parent="Bingkai_9x16/Padding_Container/Content_VBox/Pilihan_Parang"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("4_edqyy")
+texture_pressed = ExtResource("5_us05s")
+
+[node name="Pilihan_Kawung" type="VBoxContainer" parent="Bingkai_9x16/Padding_Container/Content_VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Thumbnail_Kawung" type="TextureRect" parent="Bingkai_9x16/Padding_Container/Content_VBox/Pilihan_Kawung"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+texture = ExtResource("6_3sk3t")
+
+[node name="Btn_Pilih_Kawung" type="TextureButton" parent="Bingkai_9x16/Padding_Container/Content_VBox/Pilihan_Kawung"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+texture_normal = ExtResource("4_edqyy")
+texture_pressed = ExtResource("5_us05s")
+
+[node name="Btn_kembali" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 0
+offset_left = 207.0
+offset_top = 606.0
+offset_right = 507.0
+offset_bottom = 681.0
+texture_normal = ExtResource("8_us05s")
+texture_pressed = ExtResource("9_3sk3t")
+
+[connection signal="pressed" from="Btn_kembali" to="Background_Polos" method="_on_btn_kembali_pressed"]

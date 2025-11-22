@@ -1,0 +1,134 @@
+[gd_scene load_steps=12 format=3 uid="uid://3qasr18xsjpi"]
+
+[ext_resource type="Script" uid="uid://cs3kg6vqcfjdc" path="res://pustaka_pola.gd" id="1_4u260"]
+[ext_resource type="Texture2D" uid="uid://bvqsqanu7snq" path="res://bg perpus.png" id="1_xhuql"]
+[ext_resource type="PackedScene" uid="uid://dt7mrk0t7h0a5" path="res://lito.tscn" id="2_b8nu4"]
+[ext_resource type="PackedScene" uid="uid://lwp6ah1wn5vr" path="res://container_atas.tscn" id="3_x8mr1"]
+[ext_resource type="FontFile" uid="uid://df1280yfbh3k2" path="res://Aset New/bytebounce/ByteBounce.ttf" id="5_njmk4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhuql"]
+size = Vector2(715, 207)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b8nu4"]
+size = Vector2(715, 207)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8mr1"]
+size = Vector2(14.5, 404)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4u260"]
+size = Vector2(10.5, 421)
+
+[sub_resource type="Theme" id="Theme_4u260"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njmk4"]
+bg_color = Color(0.6902493, 0.6004892, 0, 1)
+
+[node name="PustakaPola" type="Node2D"]
+script = ExtResource("1_4u260")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(363.50003, 640)
+scale = Vector2(3.75, 4.04)
+texture = ExtResource("1_xhuql")
+
+[node name="floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 620)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+position = Vector2(359.5, 565.5)
+shape = SubResource("RectangleShape2D_xhuql")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(0, 620)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+position = Vector2(359, -291)
+shape = SubResource("RectangleShape2D_b8nu4")
+
+[node name="wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
+position = Vector2(8.75, 895)
+shape = SubResource("RectangleShape2D_x8mr1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall"]
+position = Vector2(714.25, 892.5)
+shape = SubResource("RectangleShape2D_4u260")
+
+[node name="lito" parent="." instance=ExtResource("2_b8nu4")]
+position = Vector2(391, 919)
+
+[node name="container_atas" parent="." instance=ExtResource("3_x8mr1")]
+offset_left = 0.0
+offset_top = -2.0
+offset_right = 720.0
+offset_bottom = 128.0
+
+[node name="Panel_Mode_Select" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Wayang_Button_Hitbox" type="TextureButton" parent="Panel_Mode_Select"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 820.0
+offset_right = 65.0
+offset_bottom = 860.0
+scale = Vector2(4, 4)
+
+[node name="Batik_Button_Hitbox" type="TextureButton" parent="Panel_Mode_Select"]
+z_index = 1
+layout_mode = 0
+offset_left = 550.0
+offset_top = 820.0
+offset_right = 590.0
+offset_bottom = 860.0
+scale = Vector2(4, 4)
+
+[node name="Panel_Kuis_Wayang" type="Panel" parent="."]
+offset_left = 170.0
+offset_top = 500.0
+offset_right = 570.0
+offset_bottom = 1100.0
+theme = SubResource("Theme_4u260")
+theme_override_styles/panel = SubResource("StyleBoxFlat_njmk4")
+
+[node name="Question_Label" type="Label" parent="Panel_Kuis_Wayang"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_njmk4")
+theme_override_font_sizes/font_size = 100
+
+[node name="Answer_A" type="Button" parent="Panel_Kuis_Wayang/Question_Label"]
+layout_mode = 0
+offset_top = 120.0
+offset_right = 400.0
+offset_bottom = 220.0
+theme_override_colors/font_color = Color(0.021434566, 0.021434668, 0.021434598, 1)
+theme_override_fonts/font = ExtResource("5_njmk4")
+theme_override_font_sizes/font_size = 50
+
+[node name="Answer_B" type="Button" parent="Panel_Kuis_Wayang/Question_Label"]
+layout_mode = 0
+offset_top = 250.0
+offset_right = 400.0
+offset_bottom = 350.0
+theme_override_colors/font_color = Color(0.017732333, 0.01773242, 0.017732358, 1)
+theme_override_fonts/font = ExtResource("5_njmk4")
+theme_override_font_sizes/font_size = 50
+
+[node name="Answer_C" type="Button" parent="Panel_Kuis_Wayang/Question_Label"]
+layout_mode = 0
+offset_top = 380.0
+offset_right = 400.0
+offset_bottom = 480.0
+theme_override_colors/font_color = Color(0.03839705, 0.038397226, 0.038397092, 1)
+theme_override_fonts/font = ExtResource("5_njmk4")
+theme_override_font_sizes/font_size = 50
+
+[connection signal="pressed" from="Panel_Mode_Select/Wayang_Button_Hitbox" to="." method="_on_wayang_button_hitbox_pressed"]
+[connection signal="pressed" from="Panel_Mode_Select/Batik_Button_Hitbox" to="." method="_on_batik_button_hitbox_pressed"]
