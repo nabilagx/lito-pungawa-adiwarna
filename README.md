@@ -2,10 +2,6 @@
 
 **Game Simulasi Inkubasi Ekonomi Kreatif Berbasis Budaya Nusantara (2D)**
 
-🔗 **Demo Game:** *isi link di sini*
-🔗 **Dokumentasi:** *isi link di sini*
-🔗 **Repository Godot:** *isi link di sini*
-
 ---
 
 ## 💡 **Konsep Inti**
