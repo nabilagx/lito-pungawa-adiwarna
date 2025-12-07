@@ -230,3 +230,14 @@ frame_progress = 0.70816845
 position = Vector2(-18, -26)
 shape = SubResource("RectangleShape2D_q6r6c")
 debug_color = Color(0.49428427, 0.5315848, 0.65504384, 0.41960785)
+
+[node name="MobileControls" type="CanvasLayer" parent="."]
+
+[node name="TombolKiri" type="TouchScreenButton" parent="MobileControls"]
+action = "ui_left"
+
+[node name="TombolKanan" type="TouchScreenButton" parent="MobileControls"]
+action = "ui_right"
+
+[node name="TombolLompat" type="TouchScreenButton" parent="MobileControls"]
+action = "ui_accept"
