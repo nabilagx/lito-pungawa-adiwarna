@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://xn2njahajkst"]
+
+[ext_resource type="Script" uid="uid://bdp2is41etlue" path="res://Mode_Puzzle.gd" id="1_umjxr"]
+[ext_resource type="Texture2D" uid="uid://cqhk5xg5y46ma" path="res://Aset New/puzzle/card awal puzzle.png" id="2_kysdk"]
+
+[node name="Mode_Puzzle" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -1.0
+offset_right = 722.0
+offset_bottom = 1277.0
+script = ExtResource("1_umjxr")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(363.00003, 641)
+scale = Vector2(1.0083334, 1.0015626)
+texture = ExtResource("2_kysdk")
+
+[node name="Btn_Pilih_Prambanan" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 188.0
+offset_right = 458.0
+offset_bottom = 472.0
+
+[connection signal="pressed" from="Btn_Pilih_Prambanan" to="." method="_on_btn_pilih_prambanan_pressed"]

@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://b86sp7x7bmeyo"]
+
+[ext_resource type="Script" uid="uid://dea0d8bx5663v" path="res://Prambanan.gd" id="1_iooby"]
+[ext_resource type="Texture2D" uid="uid://dc88ygvxo1g51" path="res://Aset New/puzzle/puzzle 0.png" id="2_3rfq0"]
+[ext_resource type="Texture2D" uid="uid://bbckvqnt6cvno" path="res://Aset New/puzzle/new 60.png" id="3_iooby"]
+[ext_resource type="Texture2D" uid="uid://byb8l73ek4kir" path="res://Aset New/puzzle/new 100.png" id="4_iooby"]
+
+[node name="Prambanan" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 716.0
+offset_bottom = 1279.0
+script = ExtResource("1_iooby")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(363.00003, 641)
+scale = Vector2(1.0083334, 1.0015626)
+texture = ExtResource("2_3rfq0")
+
+[node name="Prambanan1" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 953.0
+offset_right = 638.0
+offset_bottom = 1089.0
+
+[node name="Btn_Prambanan_1" type="TextureButton" parent="Prambanan1"]
+layout_mode = 2
+
+[node name="Prambanan2" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 953.0
+offset_right = 638.0
+offset_bottom = 1089.0
+
+[node name="Btn_Prambanan_2" type="TextureButton" parent="Prambanan2"]
+layout_mode = 2
+
+[node name="card_prambanan_2" type="Sprite2D" parent="Prambanan2"]
+position = Vector2(279.00003, -312)
+scale = Vector2(1.0083334, 1.0015626)
+texture = ExtResource("3_iooby")
+
+[node name="Prambanan3" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 194.0
+offset_right = 638.0
+offset_bottom = 1089.0
+
+[node name="Btn_Prambanan_3" type="TextureButton" parent="Prambanan3"]
+layout_mode = 2
+
+[node name="card_prambanan_3" type="Sprite2D" parent="Prambanan3"]
+position = Vector2(279.00003, 447)
+scale = Vector2(1.0083334, 1.0015626)
+texture = ExtResource("4_iooby")
+
+[connection signal="pressed" from="Prambanan1/Btn_Prambanan_1" to="." method="_on_btn_prambanan_1_pressed"]
+[connection signal="pressed" from="Prambanan2/Btn_Prambanan_2" to="." method="_on_btn_prambanan_2_pressed"]
+[connection signal="pressed" from="Prambanan3/Btn_Prambanan_3" to="." method="_on_btn_prambanan_3_pressed"]

@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmu3cpncog7l7"]
+
+[ext_resource type="Script" uid="uid://41tir2jawkme" path="res://cipta_market.gd" id="1_5x771"]
+[ext_resource type="Texture2D" uid="uid://5t7g7nn8m5h6" path="res://Aset New/cipta market/Cipta 1.png" id="1_fv64p"]
+[ext_resource type="PackedScene" uid="uid://lwp6ah1wn5vr" path="res://container_atas.tscn" id="2_yevkn"]
+[ext_resource type="Texture2D" uid="uid://esfxcbsek4e7" path="res://Aset New/cipta market/kembali.png" id="4_p6tvp"]
+[ext_resource type="Texture2D" uid="uid://c4vdfnpfuebjq" path="res://Aset New/cipta market/colab.png" id="5_5x771"]
+[ext_resource type="Texture2D" uid="uid://bvyck8w4fqjn0" path="res://Aset New/cipta market/cipta jual 1.png" id="5_li2ex"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_5x771"]
+
+[node name="Cipta_Market" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_5x771")
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(360.5, 640.49994)
+scale = Vector2(1.0013889, 1.0007813)
+texture = ExtResource("1_fv64p")
+
+[node name="jual" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 639.0
+offset_right = 336.0
+offset_bottom = 706.0
+theme_override_styles/panel = SubResource("StyleBoxLine_5x771")
+
+[node name="jual_150_koin" type="TextureButton" parent="jual"]
+layout_mode = 2
+
+[node name="terjual" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 9.0
+offset_bottom = 17.0
+
+[node name="background2" type="Sprite2D" parent="terjual"]
+position = Vector2(360.5, 640.49994)
+scale = Vector2(1.0013889, 1.0007813)
+texture = ExtResource("5_li2ex")
+
+[node name="kembali" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 1101.0
+offset_right = 688.0
+offset_bottom = 1169.0
+texture_pressed = ExtResource("4_p6tvp")
+
+[node name="NotifLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 481.0
+offset_right = 652.0
+offset_bottom = 667.0
+
+[node name="kolaborasi_demo" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 829.0
+offset_right = 354.0
+offset_bottom = 1092.0
+
+[node name="container_atas" parent="." instance=ExtResource("2_yevkn")]
+layout_mode = 1
+offset_left = -20.0
+offset_top = -42.0
+offset_right = 700.0
+offset_bottom = 88.0
+
+[node name="demo" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 9.0
+offset_bottom = 17.0
+
+[node name="demo colab" type="Sprite2D" parent="demo"]
+position = Vector2(360.5, 640.49994)
+scale = Vector2(1.0013889, 1.0007813)
+texture = ExtResource("5_5x771")
+
+[node name="mulai" type="TextureButton" parent="demo"]
+layout_mode = 2
+
+[connection signal="pressed" from="jual/jual_150_koin" to="." method="_on_jual_150_koin_pressed"]
+[connection signal="pressed" from="kembali" to="." method="_on_kembali_pressed"]
+[connection signal="pressed" from="kolaborasi_demo" to="." method="_on_kolaborasi_demo_pressed"]
+[connection signal="pressed" from="demo/mulai" to="." method="_on_mulai_pressed"]

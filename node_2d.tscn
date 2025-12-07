@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ba34j48541e"]
+[gd_scene load_steps=25 format=3 uid="uid://ba34j48541e"]
 
 [ext_resource type="Texture2D" uid="uid://dgytfu75boslb" path="res://background studio 1.png" id="1_0hol4"]
 [ext_resource type="Script" uid="uid://c74jbuwopr5jb" path="res://Game.gd" id="1_hqns4"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://dt7mrk0t7h0a5" path="res://lito.tscn" id="13_0h7mo"]
 [ext_resource type="Texture2D" uid="uid://qs50sf5sqrrm" path="res://Aset New/button/jepret.png" id="13_fs4d3"]
 [ext_resource type="Texture2D" uid="uid://fn7mlio8gxvd" path="res://Aset New/button/jepret_press.png" id="14_7vxoj"]
+[ext_resource type="Texture2D" uid="uid://dr0fdbl3jncsd" path="res://Aset New/button/bunyi.png" id="17_k73cj"]
+[ext_resource type="Texture2D" uid="uid://k6f3wub8nuas" path="res://Aset New/button/bisu.png" id="18_rjqkl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hol4"]
 size = Vector2(715, 207)
@@ -141,7 +143,7 @@ texture_pressed = ExtResource("9_0h7mo")
 [node name="Panel_jual" type="PanelContainer" parent="UI_utama/cotainer_bawah"]
 layout_mode = 2
 
-[node name="TextureButton" type="TextureButton" parent="UI_utama/cotainer_bawah/Panel_jual"]
+[node name="icon_jual" type="TextureButton" parent="UI_utama/cotainer_bawah/Panel_jual"]
 layout_mode = 2
 texture_normal = ExtResource("8_x0ka3")
 texture_pressed = ExtResource("11_nr8wp")
@@ -180,11 +182,11 @@ texture_normal = ExtResource("13_fs4d3")
 texture_pressed = ExtResource("14_7vxoj")
 
 [node name="NotifLabel" type="Label" parent="UI_utama"]
-visible = false
-offset_left = 54.0
-offset_top = 481.0
-offset_right = 705.0
-offset_bottom = 667.0
+offset_left = 77.0
+offset_top = 457.0
+offset_right = 684.0
+offset_bottom = 608.0
+theme_override_font_sizes/font_size = 25
 
 [node name="FadeOverlay" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -220,7 +222,21 @@ offset_left = 101.0
 offset_top = 615.0
 offset_right = 653.0
 offset_bottom = 844.0
+theme_override_font_sizes/font_size = 25
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Btn_MuteToggle" type="TextureButton" parent="."]
+offset_left = 28.0
+offset_top = 306.0
+offset_right = 128.0
+offset_bottom = 406.0
+texture_normal = ExtResource("17_k73cj")
+texture_pressed = ExtResource("18_rjqkl")
 
 [connection signal="pressed" from="UI_utama/cotainer_bawah/Panel_belajar/icon_belajar" to="." method="_on_icon_belajar_pressed"]
 [connection signal="pressed" from="UI_utama/cotainer_bawah/Panel_cipta/icon_cipta" to="." method="_on_icon_cipta_pressed"]
+[connection signal="pressed" from="UI_utama/cotainer_bawah/Panel_jual/icon_jual" to="." method="_on_icon_jual_pressed"]
 [connection signal="pressed" from="UI_utama/Panel_Pilihan_Cipta/Btn_LukisBatik" to="." method="_on_btn_lukis_batik_pressed"]
+[connection signal="pressed" from="UI_utama/Panel_Pilihan_Cipta/Btn_Puzzle" to="." method="_on_btn_puzzle_pressed"]
+[connection signal="pressed" from="Btn_MuteToggle" to="." method="_on_btn_mute_toggle_pressed"]

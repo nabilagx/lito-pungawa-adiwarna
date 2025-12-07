@@ -21,6 +21,7 @@ border_color = Color(1, 0.8433892, 0, 0)
 [node name="LukisBatik" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("2_135sn")
 
 [node name="Background_Polos" type="TextureRect" parent="."]
 layout_mode = 0
@@ -28,7 +29,6 @@ offset_top = 1.0
 offset_right = 720.0
 offset_bottom = 1277.0
 texture = ExtResource("1_8s83d")
-script = ExtResource("2_135sn")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
@@ -104,4 +104,5 @@ offset_bottom = 681.0
 texture_normal = ExtResource("8_us05s")
 texture_pressed = ExtResource("9_3sk3t")
 
-[connection signal="pressed" from="Btn_kembali" to="Background_Polos" method="_on_btn_kembali_pressed"]
+[connection signal="pressed" from="Bingkai_9x16/Padding_Container/Content_VBox/Pilihan_Kawung/Btn_Pilih_Kawung" to="." method="_on_btn_pilih_kawung_pressed"]
+[connection signal="pressed" from="Btn_kembali" to="." method="_on_btn_kembali_pressed"]
