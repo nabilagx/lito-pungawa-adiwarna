@@ -2,10 +2,6 @@
 
 **Game Simulasi Inkubasi Ekonomi Kreatif Berbasis Budaya Nusantara (2D)**
 
-🔗 **Demo Game:** *isi link di sini*
-🔗 **Dokumentasi:** *isi link di sini*
-🔗 **Repository Godot:** *isi link di sini*
-
 ---
 
 ## 💡 **Konsep Inti**
@@ -61,30 +57,6 @@ Game ini berfokus pada **manajemen sumber daya (resource management)**:
 ## ✨ **Visi**
 
 > “Lito bukan sekadar game, tapi **inkubator virtual** yang mengajarkan bahwa budaya adalah bahan bakar utama ekonomi kreatif generasi masa depan.”
-
----
-
-## 👥 **Tim Punggawa Adiwarna**
-
-### **1. Nabila Choirunisa — Ketua**
-
-**Peran:** Lead Programmer, UI/UX Designer (Teknologi)
-
-### **2. Rahma Aulia Cahyani — Anggota 1**
-
-**Peran:** Asset Integrator, Pixel Artist (Teknologi)
-
-### **3. Febriani M. Sitanggang — Anggota 2**
-
-**Peran:** Game System Designer, Economy Analyst (Teknologi)
-
-### **4. Heni Fourtunaningtyas — Anggota 3**
-
-**Peran:** Lead Pixel Artist, Visual Asset Creator (Teknologi)
-
-### **5. Halfi Syahdan Basith — Anggota 4**
-
-**Peran:** Cultural Content Curator, Educational Designer (Budaya)
 
 ---
 
