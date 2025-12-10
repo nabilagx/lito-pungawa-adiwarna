@@ -1,7 +1,7 @@
 extends Node
 
 # --- 1. VARIABEL UTAMA (DATABASE GAME) ---
-var koin_cipta = 990          # Modal awal 100 (biar ga langsung kalah)
+var koin_cipta = 950          # Modal awal 100 (biar ga langsung kalah)
 var literasi_level = 100
 var energi_kreatif = 100
 var inventory_aset = 0        # Stok barang siap jual
@@ -12,12 +12,12 @@ const LITERASI_MAKS = 100
 const ENERGI_MAKS = 100
 
 # --- 2. PENGATURAN LOGIKA GAME (BALANCING) ---
-const BIAYA_SEWA = 30         # Jumlah koin dipotong buat sewa 20, lustrik 10
-const WAKTU_TAGIHAN = 600.0    # Detik (seberapa cepat tagihan datang)
+const BIAYA_SEWA = 30         # Jumlah koin dipotong buat sewa 20, listrik 10
+const WAKTU_TAGIHAN = 5.0    # Detik (seberapa cepat tagihan datang)
 const TARGET_MENANG = 1000    # Target koin untuk tamat
 const HARGA_JUAL = 150        # Pendapatan saat jual
-const COST_LITERASI = 10      # Biaya ilmu saat jual
-const COST_KREATIF = 10       # Biaya tenaga saat jual
+const COST_LITERASI = 20      # Biaya ilmu saat jual
+const COST_KREATIF = 20       # Biaya tenaga saat jual
 
 # --- 3. SISTEM AUDIO & NOTIFIKASI ---
 var bgm_player: AudioStreamPlayer
@@ -114,7 +114,7 @@ func _on_sewa_tagihan():
 		show_notification("Pajak Juragan! (-10 Koin)")
 	else:
 		bayar_berapa = BIAYA_SEWA # Masih 20 (Rakyat Jelata)
-		show_notification("Bayar Listrik Sanggar! (-20 Koin)")
+		show_notification("Bayar Listrik + Sewa Sanggar! (-30 Koin)")
 
 	# Potong Duitnya
 	koin_cipta -= bayar_berapa
@@ -211,20 +211,24 @@ func tampilkan_popup_menang():
 	vbox.add_child(con_ulang)
 	
 func _on_lanjut_clicked():
-	print("Lanjut Mode Juragan...")
+	print("Membeli Sertifikat & Lanjut Mode Juragan...")
 	
 	# 1. Hapus Layar Menang
 	if has_node("LayarGameMenang"):
 		get_node("LayarGameMenang").queue_free()
 	
-	# 2. Jalanin Game Lagi (UNPAUSE)
+	# 2. [LOGIKA BARU] BAYAR SERTIFIKAT (POTONG 1000)
+	koin_cipta -= TARGET_MENANG # Langsung potong 1000
+	
+	# 3. Jalanin Game Lagi (UNPAUSE)
 	get_tree().paused = false
 	
-	# 3. Kasih tau player statusnya
-	show_notification("Mode Juragan Aktif! Listrik cuma 10 Koin.")
+	# 4. Kasih Notifikasi Transaksi
+	show_notification("Sertifikat LUNAS! (-1000 Koin). Pajak Turun!")
+	print("Sertifikat dibeli. Sisa koin: ", koin_cipta)
 	
-	# Catatan: Variabel 'sudah_menang' kan udah jadi TRUE pas di cek_kondisi_menang tadi.
-	# Jadi otomatis fungsi _on_sewa_tagihan lo bakal baca itu dan kasih diskon.
+	# Catatan: Karena variabel 'sudah_menang' udah TRUE, 
+	# tagihan berikutnya otomatis cuma 10 koin (biaya listrik doang).
 
 # ==========================================================
 #              LAYAR KEMATIAN (DRAMATIS)
