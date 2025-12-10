@@ -1,18 +1,19 @@
 extends Node
 
 # --- 1. VARIABEL UTAMA (DATABASE GAME) ---
-var koin_cipta = 20          # Modal awal 100 (biar ga langsung kalah)
-var literasi_level = 0
-var energi_kreatif = 0
+var koin_cipta = 990          # Modal awal 100 (biar ga langsung kalah)
+var literasi_level = 100
+var energi_kreatif = 100
 var inventory_aset = 0        # Stok barang siap jual
 var mode_kreasi = ""
+var sudah_menang = false
 
 const LITERASI_MAKS = 100
 const ENERGI_MAKS = 100
 
 # --- 2. PENGATURAN LOGIKA GAME (BALANCING) ---
-const BIAYA_SEWA = 20         # Jumlah koin dipotong buat sewa
-const WAKTU_TAGIHAN = 30.0    # Detik (seberapa cepat tagihan datang)
+const BIAYA_SEWA = 30         # Jumlah koin dipotong buat sewa 20, lustrik 10
+const WAKTU_TAGIHAN = 600.0    # Detik (seberapa cepat tagihan datang)
 const TARGET_MENANG = 1000    # Target koin untuk tamat
 const HARGA_JUAL = 150        # Pendapatan saat jual
 const COST_LITERASI = 10      # Biaya ilmu saat jual
@@ -93,23 +94,137 @@ func aksi_jual():
 
 # Dipanggil otomatis oleh Timer setiap 30 detik
 func _on_sewa_tagihan():
-	# Jangan potong duit kalau game lagi Game Over/Pause
+	# Cek pause standar
 	if get_tree().paused:
 		return
 
-	koin_cipta -= BIAYA_SEWA
-	print("Tagihan sewa ditarik! Sisa koin: ", koin_cipta)
-	show_notification("Bayar Listrik Sanggar! (-" + str(BIAYA_SEWA) + " Koin)")
+	# --- [BAGIAN INI YANG ELO LUPA PASANG!] ---
+	# Kita suruh Timer ngintip saldo dulu.
+	# Kalau saldo udah 1000+ DAN belum dicap menang, panggil fungsi menang SEKARANG JUGA!
+	if koin_cipta >= TARGET_MENANG and sudah_menang == false:
+		cek_kondisi_menang()
+		return # <--- INI KUNCINYA! Dia bakal stop di sini dan GAK BAKAL motong duit.
+
+	# --- KE BAWAHNYA SAMA AJA ---
+	var bayar_berapa = 0
+
+	# CEK STATUS: Udah jadi juragan belum?
+	if sudah_menang == true:
+		bayar_berapa = 10 # Diskon Juragan
+		show_notification("Pajak Juragan! (-10 Koin)")
+	else:
+		bayar_berapa = BIAYA_SEWA # Masih 20 (Rakyat Jelata)
+		show_notification("Bayar Listrik Sanggar! (-20 Koin)")
+
+	# Potong Duitnya
+	koin_cipta -= bayar_berapa
+	print("Tagihan ditarik: ", bayar_berapa, " | Sisa: ", koin_cipta)
 	
-	# CEK KONDISI KALAH
+	# Tetep cek kalah kalau misal bangkrut lagi
 	if koin_cipta < 0:
 		game_over()
 
 func cek_kondisi_menang():
-	if koin_cipta >= TARGET_MENANG:
+	# Cek duit cukup DAN belum pernah menang sebelumnya
+	if koin_cipta >= TARGET_MENANG and sudah_menang == false:
 		print("MENANG!")
-		show_notification("SANGGAR LUNAS! KAMU MENANG!")
-		# Bisa tambahkan: get_tree().change_scene_to_file("res://Scenes/WinScreen.tscn")
+		
+		# 1. Tandain kalau dia udah pernah menang (biar gak muncul terus tiap jual barang)
+		sudah_menang = true 
+		
+		# 2. Pause Game (Biar momennya dapet)
+		get_tree().paused = true 
+		
+		# 3. Panggil Layar Menang
+		tampilkan_popup_menang()
+	
+func tampilkan_popup_menang():
+	if has_node("LayarGameMenang"): return
+
+	var layer = CanvasLayer.new()
+	layer.name = "LayarGameMenang"
+	layer.process_mode = Node.PROCESS_MODE_ALWAYS 
+	add_child(layer)
+	
+	# Background
+	var bg = ColorRect.new()
+	bg.color = Color(0.2, 0.2, 0, 0.9)
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	layer.add_child(bg)
+	
+	# Center Container
+	var center_con = CenterContainer.new()
+	center_con.set_anchors_preset(Control.PRESET_FULL_RECT)
+	layer.add_child(center_con)
+	
+	# VBox
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 20)
+	center_con.add_child(vbox)
+	
+	# --- TEKS JUDUL ---
+	var judul = Label.new()
+	judul.text = "SANGGAR SUKSES!" 
+	judul.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	judul.add_theme_font_size_override("font_size", 80) 
+	judul.add_theme_color_override("font_color", Color(1, 0.84, 0)) # Emas
+	vbox.add_child(judul)
+	
+	var pesan = Label.new()
+	pesan.text = "Selamat! Target 1000 Koin Tercapai.\nSanggar kini aman dari penggusuran."
+	pesan.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(pesan)
+	
+	# Spacer
+	var spacer = Control.new()
+	spacer.custom_minimum_size = Vector2(0, 30)
+	vbox.add_child(spacer)
+	
+	# --- TOMBOL 1: LANJUT JADI JURAGAN (Sesuai Request Lo) ---
+	var btn_lanjut = Button.new()
+	btn_lanjut.text = " ▶ LANJUT (MODE JURAGAN) "
+	btn_lanjut.custom_minimum_size = Vector2(350, 60)
+	btn_lanjut.add_theme_font_size_override("font_size", 24)
+	# Warna Ijo Duit
+	btn_lanjut.add_theme_color_override("font_color", Color(0.5, 1, 0.5)) 
+	
+	# Konek ke fungsi baru buat lanjutin game
+	btn_lanjut.pressed.connect(self._on_lanjut_clicked)
+	
+	var con_lanjut = CenterContainer.new()
+	con_lanjut.add_child(btn_lanjut)
+	vbox.add_child(con_lanjut)
+	
+	# Spacer Kecil
+	var spacer2 = Control.new()
+	spacer2.custom_minimum_size = Vector2(0, 10)
+	vbox.add_child(spacer2)
+
+	# --- TOMBOL 2: ULANG DARI NOL (Opsional kalo mau tobat) ---
+	var btn_ulang = Button.new()
+	btn_ulang.text = " ↻ TAMATKAN & ULANG "
+	btn_ulang.flat = true # Tombol tipis aja
+	btn_ulang.pressed.connect(self._on_restart_clicked)
+	
+	var con_ulang = CenterContainer.new()
+	con_ulang.add_child(btn_ulang)
+	vbox.add_child(con_ulang)
+	
+func _on_lanjut_clicked():
+	print("Lanjut Mode Juragan...")
+	
+	# 1. Hapus Layar Menang
+	if has_node("LayarGameMenang"):
+		get_node("LayarGameMenang").queue_free()
+	
+	# 2. Jalanin Game Lagi (UNPAUSE)
+	get_tree().paused = false
+	
+	# 3. Kasih tau player statusnya
+	show_notification("Mode Juragan Aktif! Listrik cuma 10 Koin.")
+	
+	# Catatan: Variabel 'sudah_menang' kan udah jadi TRUE pas di cek_kondisi_menang tadi.
+	# Jadi otomatis fungsi _on_sewa_tagihan lo bakal baca itu dan kasih diskon.
 
 # ==========================================================
 #              LAYAR KEMATIAN (DRAMATIS)
@@ -212,38 +327,25 @@ func tampilkan_popup_kalah():
 	vbox.add_child(tombol_container)
 
 func _on_restart_clicked():
-	print("Tombol Restart Ditekan...")
-	
-	# 1. HAPUS LAYAR HITAMNYA (Ini solusi bug-nya!)
-	var popup = get_node_or_null("LayarGameOver")
-	if popup:
-		popup.queue_free() # Buang layer ke tempat sampah
-	
-	# 2. Reset Variabel ke Awal
-	koin_cipta = 100
-	literasi_level = 0    # Pastikan ini 0
-	energi_kreatif = 0    # Pastikan ini 0
-	inventory_aset = 0    # Stok barang hilang
-	
-	# 3. Nyalakan Game Lagi
-	if bgm_player:
-		bgm_player.play()
-	
-	get_tree().paused = false # Jalanin waktu lagi
-	get_tree().reload_current_scene() # Refresh tampilan level
 	print("Restarting Game...")
 	
-	# Reset Modal
-	koin_cipta = 20 
+	# 1. HAPUS UI (Cek dua-duanya: Kalah atau Menang)
+	if has_node("LayarGameOver"):
+		get_node("LayarGameOver").queue_free()
+	if has_node("LayarGameMenang"):
+		get_node("LayarGameMenang").queue_free()
 	
-	# Nyalakan Musik Lagi
+	# 2. Reset Variabel (Pilih satu nilai modal awal, misal 1000 kayak di deklarasi atas)
+	koin_cipta = 1000 
+	literasi_level = 100
+	energi_kreatif = 100
+	inventory_aset = 0 
+	
+	# 3. Nyalakan Musik & Waktu
 	if bgm_player:
 		bgm_player.play()
 	
-	# Jalankan Game Lagi
-	get_tree().paused = false
-	
-	# Reload Scene (Bersihkan UI Game Over tadi otomatis)
+	get_tree().paused = false 
 	get_tree().reload_current_scene()
 
 # ==========================================================

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dt7mrk0t7h0a5"]
+[gd_scene load_steps=37 format=3 uid="uid://dt7mrk0t7h0a5"]
 
 [ext_resource type="Script" uid="uid://c2x8unrx0r7j0" path="res://lito.gd" id="1_51jpa"]
 [ext_resource type="Texture2D" uid="uid://dcqyqwjvxed2s" path="res://LITO IDLE diam kedip-sheet.png" id="2_n6qtm"]
@@ -216,6 +216,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r6c"]
 size = Vector2(356, 377)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51jpa"]
+size = Vector2(200, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6qtm"]
+size = Vector2(200, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iaycl"]
+size = Vector2(200, 200)
+
 [node name="lito" type="CharacterBody2D"]
 script = ExtResource("1_51jpa")
 
@@ -234,10 +243,19 @@ debug_color = Color(0.49428427, 0.5315848, 0.65504384, 0.41960785)
 [node name="MobileControls" type="CanvasLayer" parent="."]
 
 [node name="TombolKiri" type="TouchScreenButton" parent="MobileControls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-445, -1)
+shape = SubResource("RectangleShape2D_51jpa")
 action = "ui_left"
 
 [node name="TombolKanan" type="TouchScreenButton" parent="MobileControls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(413, -6)
+shape = SubResource("RectangleShape2D_n6qtm")
 action = "ui_right"
 
 [node name="TombolLompat" type="TouchScreenButton" parent="MobileControls"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-16, -505)
+shape = SubResource("RectangleShape2D_iaycl")
 action = "ui_accept"
